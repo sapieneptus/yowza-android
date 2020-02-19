@@ -2,9 +2,11 @@ package io.chrisf.yowza
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import net.hockeyapp.android.LoginManager
 import net.hockeyapp.android.UpdateManager
+import net.hockeyapp.android.utils.HockeyLog
 import java.lang.RuntimeException
 
 class DetailsViewActivity : AppCompatActivity() {
@@ -35,6 +37,7 @@ class DetailsViewActivity : AppCompatActivity() {
 
     fun initializeSDK() {
         val config = Config.fetch(this)!!
+        HockeyLog.setLogLevel(Log.VERBOSE)
         LoginManager.register(this, config.appId, config.appSecret, config.environment.url, config.authType, null)
         LoginManager.verifyLogin(this, intent)
         checkForUpdates()
